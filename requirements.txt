@@ -8,3 +8,4 @@ static3
 gunicorn
 django-crispy-forms
 pillow
+django-heroku
