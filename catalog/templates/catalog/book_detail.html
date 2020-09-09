@@ -1,0 +1,64 @@
+{% extends 'catalog/base_generic.html' %}
+
+{% block content %}
+<div class='book-detail' style="margin-right:192px">
+	<div style="margin-left:20px;padding:20px;" >
+		<h1>{{ book.title }}</h1>
+
+		<p><strong>Author:</strong><a href="{% url 'author-detail' book.author.pk %}"> {{ book.author }}</a></p> <!-- author detail link not yet defined -->
+		<hr>
+		
+	
+		<div style='width: 300px;float:left'><img class='author-image' width="200" height="40" src="#"></div>
+		<div style='width: 650px;float:right'><p style="text-align:justify;"><strong>Summary:</strong> {{ book.summary }}</p></div>
+	
+		<div style='clear: both;'></div>
+
+		<div style="margin-top:20px">
+		<p><strong>ISBN:</strong> {{ book.isbn }} </p>
+		<p><strong>Language:</strong><a href=""> {{ book.language }}</a></p>
+		<p><strong>Genre:</strong>
+			{% for book_genre in book.genre.all %} 
+				<a href="#">
+					{{ book_genre }},
+				</a>
+			{% endfor %}
+			
+		</p>
+		<p><strong>Edition:</strong> {% if book.edition %} {{ book.edition }} {% else %} NA {% endif %}</p>
+		<p><strong>Price:</strong>{% if book.price %} {{ book.price }}/- {% else %} NA{% endif %}</p>
+		</div>
+		<hr>
+		<p><strong>BUY A COPY</strong></p>
+		<div style="margin-left:0px">
+			{% if book.buy_online %}
+			<a href='{{ book.buy_online }}'>
+				<button style='margin-left: 0px;' class='btn btn-outline-info' type='submit'>Amazon IN</button>
+			</a>
+			<a href='{{ book.buy_online }}'>
+				<button style='margin-left: 10px;' class='btn btn-outline-info' type='submit'>Flipkart</button>
+			</a>
+			{% else %}
+			<a href="#">
+				<button  class='btn btn-secondary' type='submit'>NA</button>
+			</a>
+			{% endif %}
+		</div>
+	</div>
+	<div style='margin-left:60px;margin-top:20px'>
+		<h4>Copies</h4>
+
+		{% for copy in book.bookinstance_set.all %}
+			<hr>
+			<p class="{% if copy.status == 'a' %}'>text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">
+				{{ copy.get_status_display }}
+			</p>
+			{% if copy.status != 'a' %}
+				<p><strong>Due to be returned:</strong> {{ copy.due_back }}</p>
+			{% endif %}
+			<p><strong>Imprint:</strong> {{ copy.imprint }}</p>
+			<p class='text-muted'><strong>Id:</strong> {{ copy.id }}</p>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

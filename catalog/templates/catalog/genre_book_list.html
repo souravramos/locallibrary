@@ -1,0 +1,16 @@
+{% extends 'catalog/base_generic.html' %}
+
+{% block content %}
+	<h1>Genre | {{ genre }} </h1>
+	{% if genrebooks %}
+	<ul>
+		{% for genrebook in genrebooks %}
+		<li>
+			<a href="{{ genrebook.get_absolute_url }}">{{ genrebook.title }}</a> 
+		</li>
+		{% endfor %}
+	</ul>
+	{% else %}
+		<p>There are no books of this genre in the library.</p>
+	{% endif %}
+{% endblock %}

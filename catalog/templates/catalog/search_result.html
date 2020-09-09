@@ -1,0 +1,35 @@
+{% extends 'catalog/base_generic.html' %}
+
+{% block title %}
+	<title>Second Hand Books Library</title>
+{% endblock %}
+
+{% block content %}
+	<div class='home-content'>
+		<div class='search-bar mt-sm-2 mr-2' >
+			<form method='get'>
+				<input type="text" class='form-control' name="q" id='id_q' placeholder="Search Here...">
+			</form>
+		</div>
+
+		
+		<div class='container'>
+			<h1>Local Library Home</h1>
+			<p>Welcome to LocalLibrary, a website developed by <em>Sourav Chavan</em>!</p>
+		</div>			
+
+		<div class='container'>
+			{% if books %}
+			{% for each_book in books %} 
+			  
+			    <p>{{each_book.bookname}}</p>
+			       
+			{% endfor %}
+			{% endif %}
+		</div>
+
+	</div>
+	<p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+
+	
+{% endblock %}

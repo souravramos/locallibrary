@@ -1,0 +1,16 @@
+{% extends 'catalog/base_generic.html' %}
+
+{% block content %}
+	<h1>Language | {{ language }} </h1>
+	{% if languagebooks %}
+	<ul>
+		{% for languagebook in languagebooks %}
+		<li>
+			<a href="{{ languagebook.get_absolute_url }}">{{ languagebook.title}}</a> 
+		</li>
+		{% endfor %}
+	</ul>
+	{% else %}
+		<p>There are no books of this langaugege in the library.</p>
+	{% endif %}
+{% endblock %}

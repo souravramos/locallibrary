@@ -1,0 +1,10 @@
+django
+whitenoise
+psycopg2
+gitignore
+dj-database-url
+dj-static
+static3
+gunicorn
+django-crispy-forms
+pillow
